@@ -2,9 +2,11 @@ package com.example.yvtc.yvtc2017111301;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.SimpleExpandableListAdapter;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -67,7 +69,15 @@ public class MainActivity extends AppCompatActivity {
                 new String[] {"name"},
                 new int[] {android.R.id.text1}
         );
-
         lv.setAdapter(adapter);
+        lv.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                String p = groupList.get(groupPosition).get("main_name");
+                String c = childList.get(groupPosition).get(childPosition).get("name");
+                Toast.makeText(MainActivity.this, p + "," + c, Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
     }
 }
